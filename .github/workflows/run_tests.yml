@@ -19,13 +19,13 @@ jobs:
     steps:
     # PASO 1: Descargar el código de nuestro repositorio de GitHub a la máquina virtual
     - name: Checkout repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     # PASO 2: Instalar la versión oficial de Python 3.12 en la máquina virtual
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.11'
 
     # PASO 3: Instalar las dependencias de QA (Nuestros ladrillos)
     - name: Install dependencies
@@ -33,6 +33,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest google-cloud-bigquery pandas db-dtypes requests playwright
         playwright install chromium
+        pip install -r requirements.txt
 
     # PASO 4: EJECUTAR EL QUALITY GATE (Con inyección segura de secretos)
     # Usamos la palabra clave "env" para inyectar la variable de entorno desde los secretos de GitHub

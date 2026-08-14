@@ -8,7 +8,7 @@ def test_busqueda_playwright_con_pom():
 
     with sync_playwright() as p:
         # Lanzamos el navegador visible para ver el flujo real
-        navegador = p.chromium.launch(headless=False, slow_mo=500)
+        navegador = p.chromium.launch(headless=True, slow_mo=500)
         pagina = navegador.new_page()
 
         # 1. Inicializamos nuestra página usando el molde POM
