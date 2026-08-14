@@ -1,0 +1,6 @@
+pytest
+google-cloud-bigquery
+pandas
+db-dtypes
+requests
+playwright
