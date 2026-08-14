@@ -42,4 +42,4 @@ jobs:
         GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
       run: |
         # Ejecutamos Pytest con nuestra suite completa
-        pytest -v -s
+        pytest --cov=. --cov-report=term-missing --cov-report=html -v -s

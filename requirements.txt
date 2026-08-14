@@ -1,4 +1,5 @@
 pytest
+pytest-cov
 google-cloud-bigquery
 pandas
 db-dtypes
