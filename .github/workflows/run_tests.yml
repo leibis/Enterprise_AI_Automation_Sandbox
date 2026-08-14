@@ -42,4 +42,11 @@ jobs:
         GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
       run: |
         # Ejecutamos Pytest con nuestra suite completa
-        pytest --cov=. --cov-report=term-missing --cov-report=html -v -s
+        pytest --cov=. --cov-report=term-missing --cov-report=html -v -s 
+        echo "Coverage report generated in htmlcov/"
+    
+    - name: Upload coverage reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: htmlcov/
