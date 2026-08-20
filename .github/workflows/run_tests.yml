@@ -51,7 +51,7 @@ jobs:
 
       # PASO 5: Subir reporte independiente
       - name: Upload ${{ matrix.suite }} coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report-${{ matrix.suite }}
           path: htmlcov/
