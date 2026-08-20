@@ -1,5 +1,5 @@
 # 1. El nombre de tu banda transportadora (Pipeline)
-name: AAA Club Alliance - Automated QA Regression Suite
+name: Enterprise AI Sandbox - Automated QA Regression Suite
 
 # 2. ¿Cuándo se activa este pipeline?
 on:
