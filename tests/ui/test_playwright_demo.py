@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
 from pages.PlaywrightDemoPage import PlaywrightDemoPage
+pytestmark = pytest.mark.ui
 
 
 def test_busqueda_playwright_con_pom():

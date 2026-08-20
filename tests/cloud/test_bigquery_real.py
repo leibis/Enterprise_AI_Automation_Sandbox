@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
 from google.auth.exceptions import DefaultCredentialsError
-
+pytestmark = pytest.mark.cloud
 # =====================================================================
 # 📊 FUNCIÓN DE CONEXIÓN A GOOGLE CLOUD BIGQUERY
 # =====================================================================

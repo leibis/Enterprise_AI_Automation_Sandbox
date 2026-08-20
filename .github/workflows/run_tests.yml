@@ -1,52 +1,57 @@
-# 1. El nombre de tu banda transportadora (Pipeline)
 name: Enterprise AI Sandbox - Automated QA Regression Suite
 
-# 2. ¿Cuándo se activa este pipeline?
 on:
-  # Se activa automáticamente cada vez que alguien hace un "git push" (sube cambios)
-  # o hace un "pull request" (solicitud de unión) en la rama principal (main)
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
-# 3. ¿Qué trabajos (jobs) debe realizar el servidor de la nube?
 jobs:
-  run-pytest-suite:
-    # Le decimos a GitHub que use una computadora virtual con Linux Ubuntu de última generación
+  quality-gates:
+    name: ${{ matrix.suite }} Quality Gate
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [ai, api, cloud, ui]
+
     steps:
-    # PASO 1: Descargar el código de nuestro repositorio de GitHub a la máquina virtual
-    - name: Checkout repository code
-      uses: actions/checkout@v5
+      # PASO 1: Descargar el código
+      - name: Checkout repository code
+        uses: actions/checkout@v5
 
-    # PASO 2: Instalar la versión oficial de Python 3.12 en la máquina virtual
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.12'
+      # PASO 2: Configurar Python
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
 
-    # PASO 3: Instalar las dependencias de QA (Nuestros ladrillos)
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        playwright install chromium
+      # PASO 3: Instalar dependencias
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install chromium
 
+      # PASO 4: Ejecutar únicamente la categoría correspondiente
+      - name: Execute ${{ matrix.suite }} test suite
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
+        run: |
+          python -m pytest \
+            -m "${{ matrix.suite }}" \
+            --cov=. \
+            --cov-report=term-missing \
+            --cov-report=html \
+            -v \
+            -s
 
-    # PASO 4: EJECUTAR EL QUALITY GATE (Con inyección segura de secretos)
-    # Usamos la palabra clave "env" para inyectar la variable de entorno desde los secretos de GitHub
-    - name: Execute pytest regression suite
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
-      run: |
-        # Ejecutamos Pytest con nuestra suite completa
-        pytest --cov=. --cov-report=term-missing --cov-report=html -v -s 
-        echo "Coverage report generated in htmlcov/"
-    
-    - name: Upload coverage reports
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: htmlcov/
+          echo "Coverage report generated for ${{ matrix.suite }} suite."
+
+      # PASO 5: Subir reporte independiente
+      - name: Upload ${{ matrix.suite }} coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.suite }}
+          path: htmlcov/

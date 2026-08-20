@@ -1,5 +1,5 @@
 import pytest
-
+pytestmark = pytest.mark.ai
 # =====================================================================
 # 🧠 ENGINES DE EVALUACIÓN DE IA (Métricas de DeepEval Heurísticas)
 # =====================================================================

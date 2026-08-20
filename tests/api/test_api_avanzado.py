@@ -1,5 +1,5 @@
 import pytest
-
+pytestmark = pytest.mark.api
 # =====================================================================
 # 🤖 SIMULADOR DEL MOTOR DE APIs DE LA AAA (MÉTODOS POST/PUT/DELETE)
 # =====================================================================

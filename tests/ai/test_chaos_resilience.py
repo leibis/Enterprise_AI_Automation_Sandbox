@@ -1,11 +1,12 @@
 import pytest
 from src.ai_sandbox.input_validation import procesar_mensaje_con_limite
-
+pytestmark = pytest.mark.ai
 
 # =====================================================================
 # 🧪 CHAOS TEST SUITE - CONTROLLED FAILURE SCENARIOS
 # =====================================================================
-@pytest.mark.ai
+
+
 def test_chatbot_acepta_mensaje_normal():
     """Valida que un mensaje dentro del límite sea procesado normalmente."""
 
@@ -18,7 +19,6 @@ def test_chatbot_acepta_mensaje_normal():
     print("✅ El chatbot procesó un mensaje normal correctamente.")
 
 
-@pytest.mark.ai
 def test_chatbot_rechaza_mensaje_demasiado_largo():
     """
     Valida que una entrada excesiva no llegue al LLM.
@@ -37,7 +37,6 @@ def test_chatbot_rechaza_mensaje_demasiado_largo():
     print("✅ El sistema rechazó la entrada excesiva sin colapsar.")
 
 
-@pytest.mark.ai
 def test_chatbot_rechaza_tipo_de_dato_invalido():
     """
     Valida que el sistema rechace tipos de datos incorrectos.

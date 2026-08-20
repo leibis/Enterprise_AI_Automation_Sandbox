@@ -1,6 +1,6 @@
 import re
 import pytest
-
+pytestmark = pytest.mark.ai
 # -------------------------
 # Utilidades de enmascarado
 # -------------------------

@@ -1,6 +1,6 @@
 import pytest
 import time
-
+pytestmark = pytest.mark.ai
 # =====================================================================
 # 🔌 SIMULADOR DE API DE IA CON FALLAS DE INFRAESTRUCTURA (Cloud LLM)
 # =====================================================================

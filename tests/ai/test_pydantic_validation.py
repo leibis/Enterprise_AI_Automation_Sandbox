@@ -1,6 +1,6 @@
 import pytest
 from pydantic import BaseModel, Field, ValidationError
-
+pytestmark = pytest.mark.ai
 # =====================================================================
 # 📋 DEFINICIÓN DEL FORMULARIO ESTRICTO (Pydantic Model)
 # =====================================================================

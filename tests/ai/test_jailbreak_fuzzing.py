@@ -1,6 +1,6 @@
 import pytest
 from tests.ai.test_seguridad_ia import chatbot_procesar_mensaje
-
+pytestmark = pytest.mark.ai
 # =====================================================================
 # 💀 BASE DE DATOS DE ATAQUES ADVERSARIOS (OWASP LLM01 & LLM06)
 # =====================================================================

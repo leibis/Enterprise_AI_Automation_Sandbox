@@ -1,5 +1,5 @@
 import pytest
-
+pytestmark = pytest.mark.api
 # =====================================================================
 # 🤖 SIMULADOR DE API DE LA AAA CON FILTRO DE AUTORIZACIÓN (BACKEND)
 # =====================================================================

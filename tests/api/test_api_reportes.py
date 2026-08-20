@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-
+pytestmark = pytest.mark.api
 # =====================================================================
 # 🤖 SIMULADOR DE LA API DE REPORTES DE LA AAA (BACKEND)
 # =====================================================================

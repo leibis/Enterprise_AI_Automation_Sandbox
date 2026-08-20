@@ -1,5 +1,5 @@
 import pytest
-
+pytestmark = pytest.mark.ai
 # =====================================================================
 # ⚖️ SIMULADOR DEL MODELO JUEZ (LLM-AS-A-JUDGE ENGINE)
 # =====================================================================
